@@ -18,7 +18,9 @@
 
 - (FRTableViewSectionMaker * (^)(void(^)(id cell, id data, NSUInteger index)))adapter;
 
-- (FRTableViewSectionMaker * (^)(CGFloat))height;
+- (FRTableViewSectionMaker * (^)(CGFloat))rowHeight;
+- (FRTableViewSectionMaker * (^)(CGFloat))headerHeight;
+- (FRTableViewSectionMaker * (^)(CGFloat))footerHeight;
 
 - (FRTableViewSectionMaker * (^)())autoHeight;
 

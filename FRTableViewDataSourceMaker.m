@@ -21,27 +21,27 @@
     return self;
 }
 
-- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))headerView {
+- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))tableHeaderView {
     return ^FRTableViewDataSourceMaker *(UIView * (^view)()) {
-        UIView * headerView =  view();
+        UIView * tableHeaderView =  view();
         [self.tableView.tableHeaderView layoutIfNeeded];
-        self.tableView.tableHeaderView = headerView;
+        self.tableView.tableHeaderView = tableHeaderView;
         return self;
     };
 }
 
-- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))footerView {
+- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))tableFooterView {
     return ^FRTableViewDataSourceMaker *(UIView * (^view)()) {
-        UIView * footerView = view();
+        UIView * tableFooterView = view();
         [self.tableView.tableFooterView layoutIfNeeded];
-        self.tableView.tableFooterView = footerView;
+        self.tableView.tableFooterView = tableFooterView;
         return self;
     };
 }
 
-- (FRTableViewDataSourceMaker * (^)(CGFloat))height {
-    return ^FRTableViewDataSourceMaker *(CGFloat height) {
-        self.tableView.rowHeight = height;
+- (FRTableViewDataSourceMaker * (^)(CGFloat))rowHeight {
+    return ^FRTableViewDataSourceMaker *(CGFloat rowHeight) {
+        self.tableView.rowHeight = rowHeight;
         return self;
     };
 }
@@ -54,14 +54,14 @@
     self.scrollViewDidScrollBlock = block;
 }
 
-
-- (void)makeSection:(void (^)(FRTableViewSectionMaker * section))block {
+- (FRTableViewDataSourceMaker *)makeSection:(void (^)(FRTableViewSectionMaker * section))block {
     FRTableViewSectionMaker * sectionMaker = [FRTableViewSectionMaker new];
     block(sectionMaker);
     if (sectionMaker.section.cell) {
         [self.tableView registerClass:sectionMaker.section.cell forCellReuseIdentifier:sectionMaker.section.identifier];
     }
     [self.sections addObject:sectionMaker.section];
+    return self;
 }
 
 - (NSMutableArray *)sections {

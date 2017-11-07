@@ -31,6 +31,8 @@ static NSString * getIdentifier (){
 
 - (void)setFrTableViewDataSource:(FRBaseTableViewDataSource *)frTableViewDataSource {
     objc_setAssociatedObject(self,@selector(frTableViewDataSource),frTableViewDataSource,OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    self.dataSource = frTableViewDataSource;
+    self.delegate = frTableViewDataSource;
 }
 
 - (void)fr_makeDataSource:(void(^)(FRTableViewDataSourceMaker * make))maker {
@@ -58,8 +60,6 @@ static NSString * getIdentifier (){
     ds.sections = make.sections;
     ds.delegates = delegates;
     self.frTableViewDataSource = ds;
-    self.dataSource = ds;
-    self.delegate = ds;
 }
 
 - (void)fr_makeSectionWithDatas:(NSArray *)datas {
@@ -90,8 +90,6 @@ static NSString * getIdentifier (){
     ds.sections = [@[make.section] mutableCopy];
     ds.delegates = delegates;
     self.frTableViewDataSource = ds;
-    self.dataSource = ds;
-    self.delegate = ds;
 }
 
 #pragma clang diagnostic push

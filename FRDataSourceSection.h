@@ -21,7 +21,10 @@
 @property(nonatomic, strong) UIView *headerView;
 @property(nonatomic, strong) UIView *footerView;
 @property(nonatomic, assign, getter=isAutoHeight) BOOL autoHeight;
-@property(nonatomic, assign) CGFloat staticHeight;
+
+@property(nonatomic, assign) CGFloat rowHeight;
+@property(nonatomic, assign) CGFloat headerHeight;
+@property(nonatomic, assign) CGFloat footerHeight;
 
 @property(nonatomic, assign) UITableViewCellStyle tableViewCellStyle;
 

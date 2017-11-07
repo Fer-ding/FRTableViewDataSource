@@ -12,15 +12,20 @@
 
 @interface FRTableViewDataSourceMaker : NSObject
 
-- (void)makeSection:(void (^)(FRTableViewSectionMaker * section))block;
+- (instancetype)initWithTableView:(UITableView *)tableView;
+
+- (FRTableViewDataSourceMaker *)makeSection:(void (^)(FRTableViewSectionMaker * section))block;
 
 @property(nonatomic, weak) UITableView * tableView;
 @property(nonatomic, strong) NSMutableArray * sections;
 
-- (instancetype)initWithTableView:(UITableView *)tableView;
-- (FRTableViewDataSourceMaker * (^)(CGFloat))height;
-- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))headerView;
-- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))footerView;
+- (FRTableViewDataSourceMaker * (^)(CGFloat))rowHeight;
+- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))tableHeaderView;
+- (FRTableViewDataSourceMaker * (^)(UIView * (^)()))tableFooterView;
+
+//- (FRTableViewDataSourceMaker * (^)(UITableView *tableView,UITableViewCell *willDisplayCell,NSIndexPath *indexPath))cellWillDisplay;
+//- (FRTableViewDataSourceMaker * (^)(UITableView * tableView,UITableViewCellEditingStyle * editingStyle,NSIndexPath * indexPath))commitEditing;
+//- (FRTableViewDataSourceMaker * (^)(UIScrollView *scrollView))scrollViewDidScroll;
 
 - (void)commitEditing:(void(^)(UITableView * tableView,UITableViewCellEditingStyle * editingStyle,NSIndexPath * indexPath))block;
 - (void)scrollViewDidScroll:(void(^)(UIScrollView *scrollView))block;

@@ -35,9 +35,23 @@
     };
 }
 
-- (FRTableViewSectionMaker * (^)(CGFloat))height {
-    return ^FRTableViewSectionMaker *(CGFloat height) {
-        self.section.staticHeight = height;
+- (FRTableViewSectionMaker * (^)(CGFloat))rowHeight {
+    return ^FRTableViewSectionMaker *(CGFloat rowHeight) {
+        self.section.rowHeight = rowHeight;
+        return self;
+    };
+}
+
+- (FRTableViewSectionMaker *(^)(CGFloat))headerHeight {
+    return ^FRTableViewSectionMaker *(CGFloat headerHeight) {
+        self.section.headerHeight = headerHeight;
+        return self;
+    };
+}
+
+- (FRTableViewSectionMaker *(^)(CGFloat))footerHeight {
+    return ^FRTableViewSectionMaker *(CGFloat footerHeight) {
+        self.section.footerHeight = footerHeight;
         return self;
     };
 }

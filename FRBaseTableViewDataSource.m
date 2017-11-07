@@ -61,22 +61,32 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(self.sections[section].headerView) {
+    if (self.sections[section].headerHeight > 0) {
+        return self.sections[section].headerHeight;
+    }
+    else if (self.sections[section].headerView) {
         return self.sections[section].headerView.frame.size.height;
-    } else if(self.sections[section].headerTitle) {
+    }
+    else if (self.sections[section].headerTitle) {
         return 44;
-    } else {
-        return 0;
+    }
+    else {
+        return 0.0001;
     };
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if(self.sections[section].footerView) {
+    if (self.sections[section].footerHeight > 0) {
+        return self.sections[section].footerHeight;
+    }
+    else if (self.sections[section].footerView) {
         return self.sections[section].footerView.frame.size.height;
-    } else if(self.sections[section].footerTitle) {
+    }
+    else if (self.sections[section].footerTitle) {
         return 44;
-    } else {
-        return 0;
+    }
+    else {
+        return 0.0001;
     };
 }
 
@@ -103,8 +113,8 @@
         } else {
             return [numHeight floatValue];
         }
-    } else if(self.sections[section].staticHeight >0){
-        return self.sections[section].staticHeight;
+    } else if(self.sections[section].rowHeight >0){
+        return self.sections[section].rowHeight;
     } else {
         return tableView.rowHeight;
     }
@@ -249,7 +259,6 @@
     if(row[@"accessoryType"]) {
         cell.accessoryType = (UITableViewCellAccessoryType) [row[@"accessoryType"] integerValue];
     }
-    
     
     return cell;
 }
